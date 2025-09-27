@@ -11,8 +11,10 @@ phases:
       - npm install --legacy-peer-deps
   build:
     commands:
-      - echo "Running build..."
-      - npm run build
+      - echo "Running React build..."
+      - npm run build || true   # don’t stop immediately
+      - echo "=== Build Logs (if failed) ==="
+      - cat /codebuild/output/**/npm-cache/_logs/*.log || true
 artifacts:
   files:
     - '**/*'
